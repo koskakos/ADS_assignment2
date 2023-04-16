@@ -25,10 +25,12 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
     private Node head;
     private Node tail;
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean contains(Object o) {
         Node temp = head;
         for(int i = 0; i < size; i++) {
@@ -38,6 +40,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return false;
     }
 
+    @Override
     public void add(T item) {
         Node newNode = new Node(item);
         if(head == null) {
@@ -51,6 +54,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         size++;
     }
 
+    @Override
     public void add(T item, int index) {
         if(index > size || index < 0) throw new IndexOutOfBoundsException();
 
@@ -88,6 +92,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return true;
     }
 
+    @Override
     public T get(int index) {
         if(index >= size || index < 0) throw new IndexOutOfBoundsException();
         Node node = head;
@@ -97,6 +102,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return node.data;
     }
 
+    @Override
     public int indexOf(Object o) {
         Node node = head;
         for(int i = 0; i < size; i++) {
@@ -106,6 +112,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return -1;
     }
 
+    @Override
     public int lastIndexOf(Object o) {
         Node node = tail;
         for(int i = size - 1; i >= 0; i--) {
@@ -174,6 +181,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
 //        return left;
 //    }
 
+    @Override
     public T remove(int index) {
         if(index >= size || index < 0) throw new IndexOutOfBoundsException();
 
@@ -200,6 +208,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         return data;
     }
 
+    @Override
     public void clear() {
         head = null;
         tail = null;
