@@ -7,6 +7,9 @@ public class Main {
         a.add(3);
         a.add(531);
         a.add(3);
-        System.out.println(a.get(6));
+        a.remove(1);
+        for(Integer temp : a) {
+            System.out.print(temp + " ");
+        }
     }
 }

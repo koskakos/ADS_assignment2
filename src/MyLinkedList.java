@@ -1,4 +1,7 @@
-public class MyLinkedList<T extends Comparable<T>> {
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
     class Node {
         private final T data;
         private Node prev;
@@ -46,5 +49,53 @@ public class MyLinkedList<T extends Comparable<T>> {
             node = node.next;
         }
         return node.data;
+    }
+
+    public T remove(int index) {
+        if(index >= size || index < 0) throw new IndexOutOfBoundsException();
+
+        if(index == 0) {
+            T data = head.data;
+            head = head.next;
+            return data;
+        }
+
+        if(index == size - 1) {
+            T data = tail.data;
+            tail = tail.prev;
+            tail.next = null;
+            return data;
+        }
+
+        Node node = head;
+        for(int i = 0; i < index - 1; i++) {
+            node = node.next;
+        }
+        T data = node.data;
+        node.next = node.next.next;
+        size--;
+        return data;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator();
+    }
+
+    private class MyIterator implements Iterator<T> {
+        private int cursor;
+        private Node node = head;
+
+        @Override
+        public boolean hasNext() {
+            return node != null;
+        }
+
+        @Override
+        public T next() {
+            T data = node.data;
+            node = node.next;
+            return data;
+        }
     }
 }

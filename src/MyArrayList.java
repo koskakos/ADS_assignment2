@@ -51,6 +51,8 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     @Override
     public T remove(int index) {
+        if(index >= size || index < 0) throw new IndexOutOfBoundsException();
+
         T removed = (T) hiddenArray[index];
         for (int i = index; i < size; i++) {
             hiddenArray[i] = hiddenArray[i + 1];
