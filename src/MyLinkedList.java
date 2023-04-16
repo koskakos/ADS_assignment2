@@ -1,9 +1,9 @@
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
+public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
     class Node {
-        private final T data;
+        private T data;
         private Node prev;
         private Node next;
 
@@ -80,6 +80,14 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
         size++;
     }
 
+    @Override
+    public boolean remove(T item) {
+        int index = indexOf(item);
+        if(index == -1) return false;
+        remove(index);
+        return true;
+    }
+
     public T get(int index) {
         if(index >= size || index < 0) throw new IndexOutOfBoundsException();
         Node node = head;
@@ -88,6 +96,83 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
         }
         return node.data;
     }
+
+    public int indexOf(Object o) {
+        Node node = head;
+        for(int i = 0; i < size; i++) {
+            if(node.data.equals(o)) return i;
+            node = node.next;
+        }
+        return -1;
+    }
+
+    public int lastIndexOf(Object o) {
+        Node node = tail;
+        for(int i = size - 1; i >= 0; i--) {
+            if(node.data.equals(o)) return i;
+            node = node.prev;
+        }
+        return -1;
+    }
+
+    @Override
+    public void sort() {
+        for(Node i = tail; i.prev != null; i = i.prev) {
+            for(Node j = head; j != i; j = j.next) {
+                if(j.data.compareTo(j.next.data) > 0) {
+                    T data = j.data;
+                    j.data = j.next.data;
+                    j.next.data = data;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void sort(boolean ascending) {
+        for(Node i = tail; i.prev != null; i = i.prev) {
+            for(Node j = head; j != i; j = j.next) {
+                if((ascending == false ? -1 : 1 ) * j.data.compareTo(j.next.data) > 0) {
+                    T data = j.data;
+                    j.data = j.next.data;
+                    j.next.data = data;
+                }
+            }
+        }
+    }
+
+//    public void sort(boolean ascending) {
+//        quickSort(head, tail, ascending);
+//    }
+
+
+//    private void quickSort(Node start, Node end, boolean ascending) {
+//        //if(start >= end) return;
+//        if(end != null && start != end && start != end.next) {
+//            Node rightStart = partOfQuickSort(start, end, ascending);
+//            quickSort(start, rightStart.prev, ascending);
+//            quickSort(rightStart.next, end, ascending);
+//        }
+//    }
+//
+//    private Node partOfQuickSort(Node left, Node right, boolean ascending) {
+//        T pivot = left.data;
+//        Node node = left.prev;
+//
+//        for(Node i = left; i != right; i = i.next) {
+//            if(i.data.compareTo(pivot) <= 0) {
+//                node = (node == null ? left : node.next);
+//                T temp = node.data;
+//                node.data = i.data;
+//                i.data = temp;
+//            }
+//        }
+//        node = (node == null ? left : node.next);
+//        T temp = node.data;
+//        node.data = right.data;
+//        right.data = temp;
+//        return left;
+//    }
 
     public T remove(int index) {
         if(index >= size || index < 0) throw new IndexOutOfBoundsException();

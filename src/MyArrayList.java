@@ -76,7 +76,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     @Override
     public int indexOf(Object o) {
         for (int i = 0; i < size; i++) {
-            if (hiddenArray[i] == o) return i;
+            if (hiddenArray[i].equals(o)) return i;
         }
         return -1;
     }
@@ -84,7 +84,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     @Override
     public int lastIndexOf(Object o) {
         for (int i = size - 1; i >= 0; i--) {
-            if (hiddenArray[i] == o) return i;
+            if (hiddenArray[i].equals(o)) return i;
         }
         return -1;
     }

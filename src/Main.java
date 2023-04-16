@@ -7,11 +7,16 @@ public class Main {
         a.add(3);
         a.add(531);
         a.add(400);
-        a.add(327, 5);
+        //a.add(327, 5);
+        //a.remove(3);
+        a.sort(false);
         for(Integer temp : a) {
             System.out.print(temp + " ");
         }
+        System.out.println();
         System.out.println(a.size());
         System.out.println(a.contains(400));
+        System.out.println(a.indexOf(3));
+        System.out.println(a.lastIndexOf(3));
     }
 }

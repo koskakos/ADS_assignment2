@@ -12,5 +12,6 @@ public interface MyList<T extends Comparable<T>> extends Iterable<T> {
     int indexOf(Object o);
     int lastIndexOf(Object o);
     void sort();
+    void sort(boolean ascending);
     Iterator<T> iterator();
 }
