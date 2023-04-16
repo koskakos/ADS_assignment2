@@ -7,9 +7,9 @@ public class Main {
         a.add(3);
         a.add(531);
         a.add(400);
-        //a.add(327, 5);
+        a.add(327, 4);
         //a.remove(3);
-        a.sort(false);
+        //a.sort(false);
         for(Integer temp : a) {
             System.out.print(temp + " ");
         }

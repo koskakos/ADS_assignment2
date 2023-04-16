@@ -71,10 +71,17 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
             add(item);
             return;
         }
-
-        Node temp = head;
-        for(int i = 0; i < index - 1; i++) {
-            temp = temp.next;
+        Node temp;
+        if((double) size / index > 1) {
+            temp = head;
+            for(int i = 0; i < index - 1; i++) {
+                temp = temp.next;
+            }
+        } else {
+            temp = tail;
+            for(int i = size - 1; i > index + 1; i++) {
+                temp = temp.prev;
+            }
         }
         Node nextNode = temp.next;
         temp.next = newNode;
@@ -82,6 +89,7 @@ public class MyLinkedList<T extends Comparable<T>> implements MyList<T>{
         nextNode.prev = newNode;
         newNode.next = nextNode;
         size++;
+
     }
 
     @Override
