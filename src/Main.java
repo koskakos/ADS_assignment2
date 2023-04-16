@@ -6,14 +6,8 @@ public class Main {
         a.add(3);
         a.add(3);
         a.add(531);
-        a.remove(0);
-        Integer b = 531;
-        System.out.println(a.contains(b));
-        a.clear();
-        System.out.println(a.get(0));
-        System.out.println(a.get(1));
-        System.out.println(a.get(2));
-        System.out.println(a.get(3));
-        System.out.println(a.contains(531));
+        for(Integer temp : a) {
+            System.out.print(temp + " ");
+        }
     }
 }

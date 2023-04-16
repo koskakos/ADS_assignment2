@@ -1,4 +1,6 @@
-public interface MyList<T extends Comparable<T>> {
+import java.util.Iterator;
+
+public interface MyList<T extends Comparable<T>> extends Iterable<T> {
     int size();
     boolean contains(Object o);
     void add(T item);
@@ -10,4 +12,5 @@ public interface MyList<T extends Comparable<T>> {
     int indexOf(Object o);
     int lastIndexOf(Object o);
     void sort();
+    Iterator<T> iterator();
 }
