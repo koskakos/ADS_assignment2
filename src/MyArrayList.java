@@ -67,7 +67,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     @Override
     public T get(int index) {
-        if (index >= size) throw new IndexOutOfBoundsException();
+        if(index >= size || index < 0) throw new IndexOutOfBoundsException();
         return (T) hiddenArray[index];
     }
 
@@ -78,6 +78,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
         }
         return -1;
     }
+
     @Override
     public int lastIndexOf(Object o) {
         for (int i = size - 1; i >= 0; i--) {
@@ -88,7 +89,34 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
 
     @Override
     public void sort() {
+        quickSort(0, size - 1, true);
+    }
 
+    public void sort(boolean ascending) {
+        quickSort(0, size - 1, ascending);
+    }
+
+    private void quickSort(int start, int end, boolean ascending) {
+        if(start >= end) return;
+        int rightStart = partOfQuickSort(start, end, ascending);
+        quickSort(start, rightStart - 1, ascending);
+        quickSort(rightStart, end, ascending);
+    }
+
+    private int partOfQuickSort(int left, int right, boolean ascending) {
+        T pivot = (T) hiddenArray[(left + right) / 2];
+        while(left <= right) {
+            while((ascending == false ? -1 : 1) * pivot.compareTo((T) hiddenArray[left]) > 0) left++;
+            while((ascending == false ? -1 : 1) * pivot.compareTo((T) hiddenArray[right]) < 0) right--;
+            if(left <= right) {
+                Object temp = hiddenArray[left];
+                hiddenArray[left] = hiddenArray[right];
+                hiddenArray[right] = temp;
+                left++;
+                right--;
+            }
+        }
+        return left;
     }
 
     private void increaseArray() {
