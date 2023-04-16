@@ -20,7 +20,7 @@ public class MyArrayList<T extends Comparable<T>> implements MyList<T> {
     @Override
     public boolean contains(Object o) {
         for (int i = 0; i < size; i++) {
-            if (hiddenArray[i] == o) return true;
+            if (hiddenArray[i].equals(o)) return true;
         }
         return false;
     }

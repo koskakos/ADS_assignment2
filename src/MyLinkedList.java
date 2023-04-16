@@ -29,6 +29,15 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
         return size;
     }
 
+    public boolean contains(Object o) {
+        Node temp = head;
+        for(int i = 0; i < size; i++) {
+            if(temp.data.equals(o)) return true;
+            temp = temp.next;
+        }
+        return false;
+    }
+
     public void add(T item) {
         Node newNode = new Node(item);
         if(head == null) {
@@ -39,6 +48,35 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
             tail.next = newNode;
             tail = tail.next;
         }
+        size++;
+    }
+
+    public void add(T item, int index) {
+        if(index > size || index < 0) throw new IndexOutOfBoundsException();
+
+        Node newNode = new Node(item);
+
+        if(index == 0) {
+            head.prev = newNode;
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        if(index == size) {
+            add(item);
+            return;
+        }
+
+        Node temp = head;
+        for(int i = 0; i < index - 1; i++) {
+            temp = temp.next;
+        }
+        Node nextNode = temp.next;
+        temp.next = newNode;
+        newNode.prev = temp;
+        nextNode.prev = newNode;
+        newNode.next = nextNode;
         size++;
     }
 
@@ -75,6 +113,12 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
         node.next = node.next.next;
         size--;
         return data;
+    }
+
+    public void clear() {
+        head = null;
+        tail = null;
+        size = 0;
     }
 
     @Override
